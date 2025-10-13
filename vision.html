@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision | Julius Kirima</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        /* --- Reset & Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #eee;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Canvas Background --- */
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #0a0a0a;
+        }
+
+        /* --- Header --- */
+        header {
+            width: 100%;
+            background: linear-gradient(135deg, #111, #222);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f0ff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+        }
+
+        /* --- Navbar --- */
+        .navbar ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .navbar ul li a {
+            font-weight: 500;
+            color: #eee;
+            transition: 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar ul li a:hover,
+        .navbar ul li a.active {
+            color: #00f0ff;
+            text-shadow: 0 0 6px #00f0ff;
+        }
+
+        /* Hamburger for mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00f0ff;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Vision Section --- */
+        .vision {
+            max-width: 1000px;
+            margin: 120px auto 50px auto;
+            padding: 30px;
+            background: #111;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .vision h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #00f0ff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+            text-align: center;
+        }
+
+        .vision-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+                background: rgba(17, 17, 17, 0.95);
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+                width: 200px;
+            }
+
+            .navbar ul.active {
+                display: flex;
+                animation: fadeIn 0.3s ease-in-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 200;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translateY(8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translateY(-8px);
+            }
+
+            .vision h1 {
+                font-size: 2rem;
+            }
+
+            .vision-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Canvas -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h2 class="neon">JK</h2>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="vision.html" class="active">VISION</a></li>
+                    <li><a href="leadership.html">LEADERSHIP</a></li>
+                    <li><a href="blog.html">BLOGS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Vision Section -->
+    <section class="vision">
+        <div class="container">
+            <h1 class="neon">My Vision</h1>
+            <div class="vision-content">
+                <p>
+                    I see a future where African youth are not chasing opportunities abroad but creating global
+                    opportunities right from their homes. I see a continent where innovation, technology, and
+                    entrepreneurship flow like electricity, lighting up every street with possibility. My vision is
+                    to be among the leaders who will make that future a reality.
+                </p>
+                <p>
+                    Through my apps — like Vibra, AI-powered assistants, and youth platforms — I want to give young
+                    people tools that can transform their lives. I want to create ecosystems where creativity meets
+                    opportunity, where talent meets global markets, and where no dream is too small to become
+                    reality. Technology is not just my career; it is my weapon for global change.
+                </p>
+                <p>
+                    But my vision is bigger than tech. I want to solve problems that touch humanity deeply — like the
+                    lack of clean water in underserved regions. I want to design affordable and scalable water
+                    filtration systems that can save lives and restore hope. A true leader doesn’t just chase wealth;
+                    he solves the problems that matter most.
+                </p>
+                <p>
+                    Financially, I envision myself as a billionaire not for personal luxury, but for impact. Wealth
+                    in my hands is fuel to build schools, empower youth, fund innovation, and transform entire
+                    communities. I want my journey to prove to every young person watching that you can rise from
+                    anywhere and change everything. My vision is bold, but so is my commitment to it.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS -->
+    <script>
+        // Hamburger toggle with click-outside close
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.navbar ul');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Matrix background effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+        const fontSize = 16;
+        const columns = Math.floor(width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = "#00f0ff";
+            ctx.font = fontSize + "px Orbitron";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 50);
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About | Julius Kirima</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500&display=swap"
+        rel="stylesheet">
+
+    <!-- External CSS (Part 2 delivered separately) -->
+    <link rel="stylesheet" href="about.css" />
+    <style>
+        /* about.css
+   Cleaned, organized, responsive CSS for About page.
+   Preserves your neon theme, dark background, and glow effects.
+*/
+
+/* CSS Variables (theme) */
+:root {
+    --bg-dark: #0a0a0a;
+    --panel-dark: rgba(20,20,20,0.92);
+    --muted: #ccc;
+    --text: #eee;
+    --accent: #00f0ff;
+    --header-grad-start: #111;
+    --header-grad-end: #222;
+    --shadow-strong: 0 5px 25px rgba(0,0,0,0.8);
+    --max-width: 1200px;
+}
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* Utility container */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Background canvas positioning */
+#matrix-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--bg-dark);
+    display: block;
+}
+
+/* Header */
+header {
+    width: 100%;
+    background: linear-gradient(135deg, var(--header-grad-start), var(--header-grad-end));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Remove list default styles */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    display: inline-block;
+    padding: 8px 6px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    transition: color .22s ease, text-shadow .22s ease, transform .12s ease;
+    font-size: 0.95rem;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--accent);
+    text-shadow: 0 0 6px var(--accent);
+    transform: translateY(-1px);
+}
+
+/* Hamburger (mobile) */
+.hamburger {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger:focus {
+    outline: 2px solid rgba(0,240,255,0.14);
+    outline-offset: 4px;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--accent);
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: transform .18s ease, opacity .18s ease;
+}
+
+/* When nav active on mobile, slight animation could be added (kept simple) */
+.nav-links.mobile-hidden {
+    display: none;
+}
+
+/* About Card / Content */
+.about {
+    max-width: 1000px;
+    margin: 120px auto 50px auto;
+    padding: 40px;
+    background: var(--panel-dark);
+    border-radius: 12px;
+    box-shadow: var(--shadow-strong);
+    color: var(--muted);
+}
+
+.about h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
+    color: var(--accent);
+    margin-bottom: 30px;
+    text-shadow: 0 0 8px var(--accent), 0 0 18px var(--accent);
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin: 25px 0 15px;
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 6px var(--accent);
+}
+
+.about-content p {
+    color: #ccc;
+    line-height: 1.9;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-top: 1px solid #222;
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+footer a {
+    margin-left: 10px;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+footer a img {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* Responsive behavior */
+@media (max-width: 1024px) {
+    .about {
+        padding: 32px;
+    }
+
+    .about h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .nav-links {
+        /* mobile menu styles */
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        background: #111;
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px;
+        border-radius: 10px;
+        box-shadow: 0 8px 26px rgba(0,0,0,0.6);
+        display: none;
+        min-width: 200px;
+        z-index: 200;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Slightly smaller text on mobile */
+    .about {
+        margin: 100px 16px 40px 16px;
+        padding: 24px;
+    }
+
+    .about h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .about-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Provide a subtle focus state for links for keyboard users */
+a:focus {
+    outline: 2px dashed rgba(0,240,255,0.12);
+    outline-offset: 4px;
+    text-decoration: none;
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Background Canvas -->
+    <canvas id="matrix-bg" aria-hidden="true"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html" aria-label="Vibra Home">
+                    <img src="https://i.ibb.co/Ngs7NbHR/IMG-20250815-WA0006-3.jpg" alt="Logo">
+                </a>
+            </div>
+
+            <nav class="navbar" role="navigation" aria-label="Main Navigation">
+                <!-- Mobile hamburger as a button for accessibility -->
+                <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="nav-menu"
+                    aria-label="Toggle navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+
+                <ul id="nav-menu" class="nav-links" role="menubar">
+                    <li role="none"><a role="menuitem" href="index.html">HOME</a></li>
+                    <li role="none"><a role="menuitem" href="about.html" class="active">ABOUT</a></li>
+                    <li role="none"><a role="menuitem" href="vision.html">VISION</a></li>
+                    <li role="none"><a role="menuitem" href="leadership.html">LEADERSHIP</a></li>
+                    <li role="none"><a role="menuitem" href="blog.html">BLOGS</a></li>
+                    <li role="none"><a role="menuitem" href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section class="about" aria-labelledby="about-heading">
+            <div class="container content-inner">
+                <h1 id="about-heading">About Julius Kirima</h1>
+                <div class="about-content">
+
+                    <h2 class="section-title">Introduction</h2>
+                    <p>I am <strong>Julius Kirima</strong>, an 18-year-old visionary entrepreneur from Kenya. Growing up in
+                        East Africa, I’ve always been surrounded by a community of hardworking people who believe in
+                        creating opportunities despite challenges. Watching the struggles and resilience of those around me
+                        opened my eyes to how much potential lies within young people, not only in Kenya but across Africa.
+                        That perspective shaped the way I think about life, innovation, and the future.</p>
+                    <p>My childhood wasn’t filled with luxury or shortcuts — it was filled with curiosity. I constantly
+                        asked questions about how things worked, from simple devices in our home to the apps I saw others
+                        using on their phones. While many saw these as tools for entertainment, I saw them as opportunities
+                        — a window into solving problems that affect millions of people.</p>
+                    <p>The more I observed, the clearer it became to me that Africa is not short of talent or creativity;
+                        what’s missing is a platform for that creativity to transform into real-world solutions. That
+                        realization is what continues to push me every day. I don’t see myself only as a dreamer but as a
+                        builder — someone who is willing to start small, learn constantly, and grow into a person who leaves
+                        lasting impact.</p>
+                    <p>At just 18, I still have much to learn, but I don’t see my age as a limitation. I see it as an
+                        advantage. Youth brings energy, new ideas, and the courage to take risks where others hesitate. My
+                        journey is still at its beginning, but every step I take is aimed at laying the foundation for
+                        something bigger than myself.</p>
+
+                    <h2 class="section-title">My Mission</h2>
+                    <p>My mission is simple but deep: to build solutions that empower young people, create opportunities,
+                        and inspire innovation across Africa and beyond. I believe that technology should not just entertain
+                        or connect — it should also solve problems, open doors, and drive development.</p>
+                    <p>For me, this mission is not only about creating apps, platforms, or companies. It’s about creating a
+                        movement. A movement where young Africans see themselves as problem-solvers, innovators, and global
+                        contributors. I want to help shift the mindset from waiting for opportunities to creating them.</p>
+                    <p>This mission also comes from a personal place. I’ve seen how lack of opportunities holds back
+                        brilliant minds. I’ve had friends with amazing ideas but no guidance, tools, or support to bring
+                        them to life. That is why mentorship, education, and collaboration are so important to me. I don’t
+                        just want to succeed individually; I want to bring others along.</p>
+                    <p>In the long term, I see myself building ecosystems — spaces where youth can innovate, test ideas, and
+                        create scalable solutions. Whether through apps like Vibra, AI-powered tools, or social empowerment
+                        platforms, my goal is to design technology that responds to the realities of African lives while
+                        still being competitive globally.</p>
+
+                    <h2 class="section-title">Educational Journey</h2>
+                    <p>My education has not been the traditional one of sitting in classrooms alone. While school played its
+                        role, most of my learning has come from curiosity, self-teaching, and relentless exploration. I’ve
+                        spent countless hours online, teaching myself programming languages, understanding how apps are
+                        built, and learning how artificial intelligence can be applied to solve real challenges.</p>
+                    <p>For me, education is not just about certificates but about skills and mindset. Every day, I challenge
+                        myself to learn something new — whether it’s coding, design, entrepreneurship, or leadership. I
+                        strongly believe that the world we live in today rewards those who are adaptable and willing to
+                        learn fast.</p>
+                    <p>Of course, the path has not been easy. There have been times when I felt overwhelmed, especially when
+                        facing technical problems without anyone to guide me. But those challenges became my teachers.
+                        Struggling through coding errors or design flaws taught me persistence, problem-solving, and
+                        patience.</p>
+                    <p>Being self-taught also gave me confidence. It proved to me that knowledge is accessible to anyone who
+                        is willing to put in the effort. While many young people my age focus on distractions, I chose to
+                        focus on building myself. That decision continues to shape my journey, giving me a foundation that
+                        will support everything I build in the future.</p>
+
+                    <h2 class="section-title">Rookie CEO Story</h2>
+                    <p>Becoming a “rookie CEO” at 18 is not about having a big company or millions in the bank. For me, it’s
+                        about taking the first real steps into leadership, vision, and responsibility. I didn’t wait to
+                        finish school or to have perfect conditions — I started with what I had: an idea, a laptop, and the
+                        courage to try.</p>
+                    <p>My first serious attempt at leadership was when I began working on Vibra, a social networking app
+                        built for young people. I wanted it to combine the best features of platforms like Facebook, TikTok,
+                        and Instagram, while also addressing unique local needs such as empowerment, jobs, and youth
+                        opportunities. The process was far from smooth — I had to learn, fail, and adjust quickly.</p>
+                    <p>Calling myself a CEO at this stage is not about ego. It’s about mindset. It’s about training myself
+                        to think beyond just coding an app, but to think about users, growth, impact, and sustainability.
+                        Every choice I make today is preparing me for the bigger challenges of running a real, scalable
+                        company tomorrow.</p>
+                    <p>Being a rookie CEO also means facing doubt — from others and sometimes even from myself. But I remind
+                        myself that every great founder started as a beginner. Every billion-dollar company started as an
+                        idea in someone’s head. I might be at the beginning of my story, but I believe strongly in where I
+                        am headed.</p>
+
+                    <h2 class="section-title">Company Background</h2>
+
+                    <p>My first company is still in its early stages, but its purpose is clear: to design and build
+                        technology that empowers. The initial focus is on Vibra, my flagship app project. Vibra is more than
+                        just a social platform; it is being built as a space for young people to connect, create, earn, and
+                        grow.</p>
+                    <p>What sets my company apart is not size but vision. We are not trying to copy what exists — we’re
+                        trying to create something new, something that belongs to Africa while still being global. From
+                        AI-powered features to opportunities for creators and job-seekers, the company is being shaped to
+                        reflect the real needs of the people who will use it.</p>
+                    <p>The early journey has been about planning, learning, and building step by step. With limited
+                        resources, I have had to be creative — using no-code tools (and at the same time learning coding), testing features, and seeking guidance
+                        from mentors whenever possible. The goal is to validate the vision, grow steadily, and eventually
+                        scale to a level where Vibra and other solutions can compete internationally.</p>
+                    <p>My company background is still being written. It’s not yet about revenue charts or global offices —
+                        it’s about planting seeds. The seeds of ideas that can grow into powerful platforms. The seeds of
+                        resilience that will allow me to overcome challenges. And the seeds of ambition that keep me
+                        grounded in my mission. </p>
+
+
+
+                    <h2 class="section-title">Closing Inspiration</h2>
+                    <p>My journey is just beginning, but my vision is clear: Africa’s youth are the architects of the
+                        future. I believe in a generation that does not wait for change but creates it. Every challenge we
+                        face is an opportunity to innovate, and every step forward is proof that dreams are valid.</p>
+                    <p><strong><em>This is the story of Julius Kirima, rookie CEO, builder, and dreamer. And this is only the beginning.
+                    </em></strong></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Julius K. Kirima | Built with vision & passion.
+        <a href="https://github.com/julius-kirima" target="_blank" rel="noopener noreferrer">
+            <img src="https://github.githubassets.com/favicons/favicon.png" alt="GitHub" width="16" height="16">
+            GitHub
+        </a>
+    </footer>
+
+    <!-- Scripts (single combined script for menu + canvas) -->
+    <script>
+        (function () {
+            // NAV / HAMBURGER BEHAVIOR
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = navMenu.querySelectorAll('a');
+
+            function toggleMenu() {
+                const isOpen = navMenu.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+
+            // Close menu when a link is clicked (mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+
+            // Close menu when clicking outside (mobile)
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.navbar') && navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            // MATRIX CANVAS EFFECT
+            const canvas = document.getElementById('matrix-bg');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*";
+            const fontSize = 16;
+            let columns = Math.floor(width / fontSize);
+            let drops = new Array(columns).fill(1);
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                columns = Math.floor(width / fontSize);
+                drops = new Array(columns).fill(1);
+            }
+
+            function draw() {
+                // translucent background to create the fade effect
+                ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.fillStyle = "#00f0ff";
+                ctx.font = fontSize + "px Orbitron, monospace";
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters[Math.floor(Math.random() * letters.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+
+                // loop
+                requestAnimationFrame(draw);
+            }
+
+            // start
+            draw();
+            window.addEventListener('resize', resize);
+        })();
+    </script>
+</body>
+
+</html>

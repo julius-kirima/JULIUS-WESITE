@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leadership | Julius Kirima</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Link to external CSS (Part 2) -->
+    <link rel="stylesheet" href="leadership.css" />
+    <style>
+        /* leadership.css */
+
+/* --- Reset & Base --- */
+:root{
+    --bg-dark: #0a0a0a;
+    --panel-dark: #111;
+    --muted: #ccc;
+    --text: #eee;
+    --neon: #00f0ff;
+    --max-width: 1200px;
+    --container-padding: 20px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+/* --- Utility container --- */
+.container {
+    width: calc(100% - 2 * var(--container-padding));
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* --- Canvas Background --- */
+#matrix-bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--bg-dark);
+    display: block;
+}
+
+/* --- Header --- */
+.site-header {
+    width: 100%;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 14px 0;
+}
+
+/* Logo / Site title */
+.site-title {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon);
+    font-size: 1.75rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px var(--neon), 0 0 16px var(--neon);
+}
+
+/* --- Navbar --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Nav links list */
+.nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Individual link */
+.nav-links li a {
+    display: inline-block;
+    font-weight: 500;
+    color: var(--text);
+    transition: color .25s ease, text-shadow .25s ease;
+    letter-spacing: 0.5px;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+/* Hover / active */
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: var(--neon);
+    text-shadow: 0 0 6px var(--neon);
+}
+
+/* --- Hamburger (mobile) --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 3px;
+    background: var(--neon);
+    border-radius: 2px;
+}
+
+/* --- Leadership Section --- */
+.leadership {
+    max-width: 1000px;
+    margin: 120px auto 50px auto; /* keep top margin for fixed header */
+    padding: 30px;
+    background: var(--panel-dark);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* .leadership-inner { } -- removed empty ruleset */
+
+.leadership h2,
+.leadership h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    color: var(--neon);
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px var(--neon), 0 0 16px var(--neon);
+    text-align: center;
+}
+
+/* ensure we apply to the heading used in HTML (h2 in this file) */
+
+/* Content paragraphs: EXACT text preserved in HTML; styling only */
+.leadership-content p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    hyphens: auto;
+}
+
+/* --- Responsive: Mobile behavior --- */
+@media (max-width: 768px) {
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    /* Switch hamburger on */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide default desktop nav - we will use mobile dropdown */
+    .nav-links {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 20px;
+        display: none; /* hidden by default on mobile */
+        flex-direction: column;
+        gap: 12px;
+        background: var(--panel-dark);
+        padding: 16px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        min-width: 180px;
+        z-index: 1100;
+    }
+
+    /* When JS sets data-visible true, display the menu */
+    .nav-links[data-visible="true"] {
+        display: flex;
+    }
+
+    /* Slightly adjust link sizes for mobile */
+    .nav-links li a {
+        padding: 10px 12px;
+        font-size: 1rem;
+    }
+
+    /* Leadership heading & paragraph sizes */
+    .leadership h2,
+    .leadership h1 {
+        font-size: 2rem;
+    }
+
+    .leadership-content p {
+        font-size: 1rem;
+    }
+
+    /* Ensure header has enough height for hamburger */
+    .header-inner {
+        padding: 12px 0;
+    }
+}
+
+/* Desktop: ensure nav is always visible and hamburger hidden */
+@media (min-width: 769px) {
+    .nav-links {
+        position: static;
+        display: flex !important; /* force desktop to show */
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+}
+
+/* Small visual adjustments for readability */
+@media (max-width: 420px) {
+    .site-title {
+        font-size: 1.25rem;
+    }
+
+    .leadership {
+        margin: 100px 12px 30px 12px;
+        padding: 20px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <!-- Background Canvas -->
+    <canvas id="matrix-bg" aria-hidden="true"></canvas>
+
+    <!-- Header / Navigation -->
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <div class="logo" aria-label="Vibra Logo">
+                <h1 class="site-title neon">JK</h1>
+            </div>
+
+            <nav class="navbar" role="navigation" aria-label="Primary Navigation">
+                <button class="hamburger" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul id="primary-navigation" class="nav-links" data-visible="false">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="vision.html">VISION</a></li>
+                    <li><a href="leadership.html" class="active">LEADERSHIP</a></li>
+                    <li><a href="#">BLOGS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main" role="main">
+        <!-- Leadership Section -->
+        <section class="leadership" aria-labelledby="leadership-heading">
+            <div class="container leadership-inner">
+                <h2 id="leadership-heading" class="neon">My Leadership Journey</h2>
+                <div class="leadership-content">
+                    <p>
+                        Leadership, to me, is not about titles — it is about action. It is about showing the way, not just
+                        talking about it. I have chosen to lead with innovation, with resilience, and with an unshakable
+                        belief
+                        that young people can shape the future. My leadership journey began the day I chose to take
+                        responsibility for my own life.
+                    </p>
+                    <p>
+                        I lead by building. Every app, every project, every idea I push forward is an example to others that
+                        leadership means service. My leadership is not about being the loudest in the room, but about
+                        creating
+                        platforms that give others a voice. Vibra is not just my project — it is a stage where millions of
+                        young people can rise.
+                    </p>
+                    <p>
+                        I believe in leading with discipline and sacrifice. That’s why I chose to focus on building my mind,
+                        body, and finances before distractions. If I cannot lead myself, I cannot lead others. My journey
+                        proves
+                        that leadership starts within — it starts with choices, habits, and the courage to walk a different
+                        path.
+                    </p>
+                    <p>
+                        The future of leadership is youth-led. I want to prove that Africa’s next great leaders are not just
+                        politicians or businessmen, but visionaries who merge tech, service, and impact. I am here not just
+                        to
+                        lead in words, but to lead in action. And my leadership is only beginning.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts: placed at end of body for performance -->
+
+    <script>
+        /* ===========================
+           Navigation (hamburger) logic
+           - toggles mobile menu
+           - closes when a nav link is selected
+           - accessible: updates aria-expanded and data-visible
+           ============================ */
+
+        (function () {
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.getElementById('primary-navigation');
+            const navLinks = Array.from(nav.querySelectorAll('a'));
+
+            function setNavVisible(visible) {
+                nav.dataset.visible = visible ? 'true' : 'false';
+                hamburger.setAttribute('aria-expanded', String(visible));
+            }
+
+            // Toggle on hamburger click
+            hamburger.addEventListener('click', function (e) {
+                const isVisible = nav.dataset.visible === 'true';
+                setNavVisible(!isVisible);
+            });
+
+            // Close menu when any link clicked (mobile)
+            navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    // Only close if the menu was open (for mobile)
+                    if (nav.dataset.visible === 'true') {
+                        setNavVisible(false);
+                    }
+                });
+            });
+
+            // Close menu when clicking outside (mobile)
+            document.addEventListener('click', function (e) {
+                const clickedInsideNav = nav.contains(e.target) || hamburger.contains(e.target);
+                if (!clickedInsideNav && nav.dataset.visible === 'true') {
+                    setNavVisible(false);
+                }
+            });
+
+            // Ensure correct nav state on resize
+            window.addEventListener('resize', function () {
+                // If desktop width, ensure menu visible flag is false (desktop layout uses CSS to show nav)
+                if (window.innerWidth > 768) {
+                    setNavVisible(false);
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        /* ===========================
+           Matrix canvas background
+           - robust setup, handles resize
+           ============================ */
+
+        (function () {
+            const canvas = document.getElementById('matrix-bg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%";
+            const fontSize = 16;
+            let columns = Math.floor(width / fontSize);
+            let drops = new Array(columns).fill(1);
+
+            function resetDrops(newColumns) {
+                columns = newColumns;
+                drops = new Array(columns).fill(1);
+            }
+
+            function draw() {
+                // translucent clear to create trailing effect
+                ctx.fillStyle = "rgba(0, 0, 0, 0.06)";
+                ctx.fillRect(0, 0, width, height);
+
+                ctx.fillStyle = "#00f0ff";
+                // Use fallback fonts for canvas text in case Orbitron isn't loaded yet
+                ctx.font = fontSize + "px Orbitron, monospace";
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = letters[Math.floor(Math.random() * letters.length)];
+                    const x = i * fontSize;
+                    const y = drops[i] * fontSize;
+
+                    ctx.fillText(text, x, y);
+
+                    if (y > height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            let animationInterval = setInterval(draw, 50);
+
+            // Handle resize
+            function handleResize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                const newColumns = Math.max(2, Math.floor(width / fontSize));
+                resetDrops(newColumns);
+            }
+
+            window.addEventListener('resize', handleResize);
+            // initial call already done via setting width/height above
+        })();
+    </script>
+</body>
+
+</html>

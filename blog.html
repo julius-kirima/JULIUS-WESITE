@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Projects Blog</title>
+
+    <!-- Fonts (kept visual theme) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;600&display=swap"
+        rel="stylesheet" />
+
+    <!-- External CSS file (Part 2) -->
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* --- Reset / Base --- */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #0d0d0d;
+    color: #eaeaea;
+    line-height: 1.6;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- Header Base --- */
+header {
+    width: 100%;
+    background: linear-gradient(135deg, #111, #222);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+/* Logo */
+.logo h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #00f0ff;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+    margin: 0;
+}
+
+/* --- Navbar --- */
+.navbar {
+    position: relative;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar .nav-links li a {
+    font-weight: 500;
+    color: #eee;
+    transition: 0.18s ease-in-out;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 6px 4px;
+}
+
+.navbar .nav-links li a:hover,
+.navbar .nav-links li a.active {
+    color: #00f0ff;
+    text-shadow: 0 0 6px #00f0ff;
+}
+
+/* --- Hamburger (Dropdown Toggle) --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 6px;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Visual bars */
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #00f0ff;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: all 0.25s ease;
+    display: block;
+}
+
+/* Animated hamburger when active */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Page Header / Hero --- */
+.page-header {
+    max-width: 1200px;
+    margin: 90px auto 20px auto; /* header is fixed so give top margin */
+    padding: 0 20px;
+    color: #eaeaea;
+}
+
+.page-header h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin: 0 0 6px 0;
+    color: #00ffe7;
+    text-shadow: 0 0 8px rgba(0, 255, 231, 0.18);
+}
+
+.page-header p {
+    margin: 0;
+    color: #bdbdbd;
+}
+
+/* --- Blog Containers --- */
+.blog-list,
+.story {
+    max-width: 900px;
+    margin: 120px auto 30px auto;
+    padding: 25px;
+    background: #141414;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 255, 231, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.blog-list:hover,
+.story:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 255, 231, 0.15);
+}
+
+/* --- Blog Items --- */
+.blog-item {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 255, 231, 0.15);
+}
+
+.blog-item h2 {
+    margin: 0 0 12px 0;
+    color: #00ffe7;
+    font-size: 1.4rem;
+    text-shadow: 0 0 6px rgba(0, 255, 231, 0.4);
+}
+
+/* --- Buttons --- */
+button {
+    background: #00ffe7;
+    color: #0d0d0d;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.18s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 231, 0.5);
+    font-family: inherit;
+}
+
+button:hover {
+    background: #0d0d0d;
+    color: #00ffe7;
+    box-shadow: 0 0 12px rgba(0, 255, 231, 0.9);
+    transform: scale(1.05);
+}
+
+/* Back button variant */
+.back-btn {
+    margin-top: 25px;
+    display: inline-block;
+    background: transparent;
+    color: #00ffe7;
+    border: 1px solid #00ffe7;
+    padding: 8px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #00ffe7;
+    color: #0d0d0d;
+    box-shadow: 0 0 10px #00ffe7;
+}
+
+/* --- Story Sections --- */
+.hidden {
+    display: none !important;
+}
+
+.story h2 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: #00ffe7;
+    text-shadow: 0 0 6px rgba(0, 255, 231, 0.6);
+}
+
+/* --- Footer --- */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 50px 0 30px 0;
+    color: #aaa;
+}
+
+/* --- Accessibility focus outlines --- */
+a:focus, button:focus, .hamburger:focus {
+    outline: 2px dashed rgba(0, 255, 231, 0.5);
+    outline-offset: 3px;
+}
+
+/* --- Mobile Dropdown Behavior --- */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #111;
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        width: 220px;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 6px 20px rgba(0, 240, 255, 0.12);
+        z-index: 1100;
+    }
+
+    /* also support nav-links.active selector */
+    .navbar .nav-links.active,
+    .navbar .nav-links[aria-hidden="false"] {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .blog-list,
+    .story {
+        margin: 100px 15px 25px 15px;
+        padding: 20px;
+    }
+}
+
+/* Large screen tweaks */
+@media (min-width: 769px) {
+    .page-header {
+        margin-top: 100px;
+    }
+}
+
+/* Small visual polish */
+@media (max-width: 420px) {
+    .logo h2 {
+        font-size: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .hamburger span {
+        width: 20px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h2 class="neon">JK</h2>
+            </div>
+
+            <nav class="navbar" aria-label="Main navigation">
+                <!-- navigation list kept identical text -->
+                <ul class="nav-links" role="menubar">
+                    <li role="none"><a role="menuitem" href="index.html">HOME</a></li>
+                    <li role="none"><a role="menuitem" href="about.html">ABOUT</a></li>
+                    <li role="none"><a role="menuitem" href="vision.html" class="active">VISION</a></li>
+                    <li role="none"><a role="menuitem" href="leadership.html">LEADERSHIP</a></li>
+                    <li role="none"><a role="menuitem" href="blog.html">BLOGS</a></li>
+                    <li role="none"><a role="menuitem" href="contact.html">CONTACT</a></li>
+                </ul>
+
+                <!-- Hamburger toggle as a button for accessibility -->
+                <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>🚀 My Projects Blog</h1>
+            <p>Click on a project to read its full story.</p>
+        </section>
+
+        <!-- Blog List -->
+        <div class="blog-list" id="blogList" aria-live="polite">
+            <div class="blog-item">
+                <h2>🏠 Rent Tracker System</h2>
+                <p>A digital tool to help landlords and tenants manage rent, payments, and records with transparency.</p>
+                <button onclick="showStory('rentTracker')">Read More</button>
+            </div>
+
+            <div class="blog-item">
+                <h2>🌍 Yuninet</h2>
+                <p>A youth networking platform designed to empower, connect, and share opportunities for African students.
+                </p>
+                <button onclick="showStory('yuninet')">Read More</button>
+            </div>
+
+            <div class="blog-item">
+                <h2>🔥 Vibra</h2>
+                <p>A social media app combining the best of Facebook, TikTok, Instagram, and Twitter with unique African
+                    innovation.</p>
+                <button onclick="showStory('vibra')">Read More</button>
+            </div>
+
+            <div class="blog-item">
+                <h2>💳 VibraPay</h2>
+                <p>A digital payments ecosystem that powers creators, businesses, and individuals with secure multi-currency
+                    transactions.</p>
+                <button onclick="showStory('vibraPay')">Read More</button>
+            </div>
+
+            <div class="blog-item">
+                <h2>💡 Juka + External Nexus</h2>
+                <p>Innovative solutions combining local creativity with global technology to solve Africa’s biggest
+                    challenges.</p>
+                <button onclick="showStory('jukaNexus')">Read More</button>
+            </div>
+        </div>
+
+        <!-- Full Stories -->
+        <article class="story hidden" id="rentTracker" tabindex="-1" aria-labelledby="rentTrackerHeading">
+            <h2 id="rentTrackerHeading">🏠 Rent Tracker System</h2>
+            <p>The Rent Tracker System was born from the frustrations I saw in rental management across Africa. Landlords
+                often had no proper records, tenants lacked proof of payments, and disputes were common. I envisioned a
+                platform that creates transparency and trust between both sides.</p>
+            <p>This system allows tenants to pay rent digitally, get receipts instantly, and track their rental history.
+                Landlords can manage multiple properties, monitor due dates, and receive payments securely. Beyond
+                technology, the lesson I learned is that the best innovations often solve very simple but painful problems.
+            </p>
+            <p>During the design process, I realized how outdated many property management practices were. Landlords used
+                notebooks and verbal agreements, while tenants often feared exploitation. By digitizing this, I was not only
+                solving a tech gap but also creating peace of mind for families and property owners.</p>
+            <p>The system also became a financial accountability tool. For tenants, it builds a digital history that can be
+                used for future creditworthiness, while landlords benefit from structured income reports. This inspired me
+                to think about how technology can indirectly improve financial inclusion in Africa.</p>
+            <p>The lesson from Rent Tracker is that not all big ideas start globally; some begin with the struggles of your
+                neighbors. By addressing local problems effectively, you create models that can be scaled worldwide. Rent
+                Tracker is a reminder that real innovation is born from empathy.</p>
+            <p>Looking back, Rent Tracker taught me patience, humility, and persistence. Building trust in financial
+                solutions takes time. But when it works, it transforms lives. That’s why I believe this project is one of my
+                foundations in tech entrepreneurship.</p>
+            <button class="back-btn" onclick="showBlogList()">⬅ Back to Blogs</button>
+        </article>
+
+        <article class="story hidden" id="yuninet" tabindex="-1" aria-labelledby="yuninetHeading">
+            <h2 id="yuninetHeading">🌍 Yuninet</h2>
+            <p>Yuninet started as a dream to create a powerful youth networking platform for African students and
+                innovators. I wanted to build something bigger than just a social platform — a space where youth can share
+                opportunities, find mentorship, and grow together.</p>
+            <p>Through Yuninet, I learned the value of ecosystems. One person alone cannot create large change, but a
+                connected community of youth can reshape industries. The lesson I carry is that community is more powerful
+                than competition, and empowerment comes from creating bridges, not walls.</p>
+            <p>One of the most inspiring things I saw was how quickly young people embraced collaboration once they had the
+                right platform. Students began sharing job opportunities, organizing mentorship calls, and even creating
+                small startups within Yuninet itself.</p>
+            <p>The platform also showed me the importance of identity and belonging. Many African youth feel invisible on
+                global platforms, but Yuninet gave them a space where they could see themselves as innovators and leaders.
+                This cultural identity is as important as technology itself.</p>
+            <p>The biggest lesson Yuninet taught me is that empowerment is not about handouts, it is about giving people the
+                right tools. A single message on Yuninet could change someone’s life — and that is powerful. It gave me
+                proof that my vision for African youth empowerment was not just a dream, but a need.</p>
+            <p>To this day, Yuninet fuels my belief that Africa’s future lies in connection. It is proof that networks are
+                the real currency of progress, and when youth unite, they create unstoppable waves of change.</p>
+            <button class="back-btn" onclick="showBlogList()">⬅ Back to Blogs</button>
+        </article>
+
+        <article class="story hidden" id="vibra" tabindex="-1" aria-labelledby="vibraHeading">
+            <h2 id="vibraHeading">🔥 Vibra</h2>
+            <p>Vibra is my boldest social media vision yet. Inspired by the strengths of Facebook, TikTok, Instagram,
+                Twitter, and Telegram — but uniquely designed for African innovation. Vibra is more than social
+                entertainment; it is empowerment.</p>
+            <p>The app integrates live streaming, digital payments, AI-powered image effects, and a youth empowerment hub.
+                Building Vibra taught me discipline, focus, and the importance of protecting intellectual property. My
+                biggest lesson was realizing that technology is not just about coding; it’s about vision, resilience, and
+                execution.</p>
+            <p>As Vibra grew in concept, I wanted it to be more than another app. It had to be a movement. A place where
+                creators earn fairly, where youth voices are amplified, and where innovation doesn’t just copy Western
+                platforms but sets new global standards.</p>
+            <p>Another unique aspect of Vibra is its empowerment center, designed to directly engage governments and provide
+                youth with access to digital skills, job opportunities, and even mental health support. This is my proof
+                that social media can be more than scrolling — it can be nation-building.</p>
+            <p>The challenges were massive — from funding to technical hurdles to skepticism. But every barrier became fuel.
+                I learned that if your vision is big enough, it scares people before it inspires them. Vibra taught me to
+                stand tall and remain committed no matter the resistance.</p>
+            <p>In the end, Vibra is more than an app. It is my statement that Africa can build world-class platforms and
+                that the youth deserve digital tools designed for them, not borrowed. Vibra is both my risk and my legacy.
+            </p>
+            <button class="back-btn" onclick="showBlogList()">⬅ Back to Blogs</button>
+        </article>
+
+        <article class="story hidden" id="vibraPay" tabindex="-1" aria-labelledby="vibraPayHeading">
+            <h2 id="vibraPayHeading">💳 VibraPay</h2>
+            <p>VibraPay is the financial backbone of Vibra and beyond. It provides secure transactions, gifting systems, and
+                multi-currency withdrawals for creators and businesses. My goal was to ensure money flows as freely and
+                securely as information online.</p>
+            <p>The lesson from VibraPay was that financial systems require trust and top-tier security. You are not just
+                building an app; you are safeguarding people’s livelihoods. This made me prioritize cybersecurity, legal
+                compliance, and transparency in all financial innovations.</p>
+            <p>VibraPay also represents independence. Too many African creators rely on foreign payment systems that limit
+                or exclude them. I wanted VibraPay to prove that Africans can build global fintech solutions by themselves.
+            </p>
+            <p>Along the journey, I discovered that fintech is not only about transactions but about empowerment. With
+                VibraPay, a creator in Kenya can receive support from fans in Brazil instantly. This borderless vision of
+                finance drives me to keep building.</p>
+            <p>The hardest part of VibraPay was ensuring compliance across multiple countries. But instead of seeing this as
+                a burden, I saw it as an opportunity to prove Africa can operate at international standards. It gave me the
+                courage to take bolder steps in fintech innovation.</p>
+            <p>VibraPay is a seed. From it, I know I can expand into wider financial ecosystems, from microloans to digital
+                banking. But for now, it is my proof that finance and creativity can merge in powerful ways.</p>
+            <button class="back-btn" onclick="showBlogList()">⬅ Back to Blogs</button>
+        </article>
+
+        <article class="story hidden" id="jukaNexus" tabindex="-1" aria-labelledby="jukaNexusHeading">
+            <h2 id="jukaNexusHeading">💡 Juka + External Nexus</h2>
+            <p>Juka and the External Nexus represent my experiments in merging creativity with global tech. Juka is about
+                local innovation; Nexus is about scaling that innovation to global levels. Together, they stand for a future
+                where African solutions can compete on the world stage.</p>
+            <p>The biggest lesson I learned is that global relevance starts with solving local problems well. If an idea can
+                serve a small community effectively, scaling it becomes natural. Nexus represents my belief that Africa can
+                lead in tech, not just follow.</p>
+            <p>Juka focused on solving specific grassroots problems, proving that everyday challenges are opportunities for
+                innovation. External Nexus, meanwhile, became my way of linking those solutions to global partners,
+                investors, and markets.</p>
+            <p>This project also taught me the importance of partnerships. No visionary changes the world alone. The Nexus
+                is not just technology, it is people — developers, entrepreneurs, governments, and users all connected in
+                one mission.</p>
+            <p>What excites me most is that Juka and Nexus show the dual nature of progress: start with what you have, then
+                link it to the world. This is Africa’s greatest path to leadership — building from within and scaling
+                outward.</p>
+            <p>To me, Juka + Nexus is not just a project, it is a philosophy. A belief that we do not need to wait for
+                permission to innovate, and that the external world is ready to embrace African brilliance when it is boldly
+                presented.</p>
+            <button class="back-btn" onclick="showBlogList()">⬅ Back to Blogs</button>
+        </article>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>
+            © 2025 Julius Kirima | Built with Vision + Code
+        </p>
+    </footer>
+
+    <!-- JavaScript: single, cleaned-up script (no changes to any text content) -->
+    <script>
+        (function () {
+            // story toggle functions (single source of truth)
+            function showStory(storyId) {
+                const blogList = document.getElementById("blogList");
+                if (blogList) blogList.classList.add("hidden");
+
+                document.querySelectorAll(".story").forEach(story => {
+                    story.classList.add("hidden");
+                });
+
+                const target = document.getElementById(storyId);
+                if (target) {
+                    target.classList.remove("hidden");
+                    // focus for accessibility
+                    target.focus();
+                }
+                // close mobile nav if open
+                const nav = document.querySelector('.nav-links');
+                const hamburger = document.querySelector('.hamburger');
+                if (nav && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger && hamburger.classList.remove('active');
+                }
+            }
+
+            function showBlogList() {
+                const blogList = document.getElementById("blogList");
+                if (blogList) blogList.classList.remove("hidden");
+
+                document.querySelectorAll(".story").forEach(story => {
+                    story.classList.add("hidden");
+                });
+                // move focus to list for accessibility
+                const blogListEl = document.getElementById("blogList");
+                blogListEl && blogListEl.focus();
+            }
+
+            // expose to global scope as used by inline onclick handlers
+            window.showStory = showStory;
+            window.showBlogList = showBlogList;
+
+            // Mobile dropdown (hamburger menu)
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function (e) {
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    navLinks.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+
+                // close nav when clicking outside on mobile
+                document.addEventListener('click', function (e) {
+                    const target = e.target;
+                    const clickedInsideNav = navLinks.contains(target) || hamburger.contains(target);
+                    if (!clickedInsideNav && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // Improve UX: close stories with Escape key and return to blog list
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    showBlogList();
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

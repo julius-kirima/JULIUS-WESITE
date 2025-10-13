@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Julius Kirima</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #0d0d0d;
+            color: #eaeaea;
+        }
+
+        /* Navbar */
+        header {
+            width: 100%;
+            background: linear-gradient(135deg, #111, #222);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .logo h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00f0ff;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+        }
+        .navbar ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        .navbar ul li a {
+            font-weight: 500;
+            color: #eee;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            color: #00f0ff;
+            text-shadow: 0 0 6px #00f0ff;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00f0ff;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 700px;
+            margin: 150px auto 50px auto;
+            padding: 30px;
+            background: #141414;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 255, 231, 0.08);
+        }
+        .contact-section h1 {
+            color: #00ffe7;
+            text-shadow: 0 0 6px #00ffe7;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .contact-section input,
+        .contact-section textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: none;
+            background: #0d0d0d;
+            color: #eaeaea;
+            box-shadow: 0 0 8px rgba(0, 255, 231, 0.3) inset;
+        }
+        .contact-section button {
+            background: #00ffe7;
+            color: #0d0d0d;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px rgba(0, 255, 231, 0.5);
+        }
+        .contact-section button:hover {
+            background: #0d0d0d;
+            color: #00ffe7;
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(0, 255, 231, 0.9);
+        }
+
+        /* Footer with social icons */
+        .footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 50px 0 30px 0;
+            color: #aaa;
+        }
+
+        .footer .social-icons {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer .social-btn img {
+            width: 32px;
+            height: 32px;
+            transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer .social-btn:hover img {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 6px #00ffe7);
+        }
+
+        .footer .social-btn.whatsapp:hover img {
+            filter: drop-shadow(0 0 6px #25D366);
+        }
+        .footer .social-btn.github:hover img {
+            filter: drop-shadow(0 0 6px #fff);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: #111;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                width: 200px;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            }
+            .navbar ul.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .contact-section {
+                margin: 120px 15px 25px 15px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h2 class="neon">JK</h2>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="vision.html">VISION</a></li>
+                    <li><a href="leadership.html">LEADERSHIP</a></li>
+                    <li><a href="blog.html">BLOGS</a></li>
+                    <li><a href="contact.html" class="active">CONTACT</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="contact-section">
+        <h1>📩 Contact Me</h1>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="6" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+    </div>
+
+    <!-- Footer with WhatsApp & GitHub -->
+    <div class="footer">
+        <footer>
+            <p>© 2025 Julius Kirima | Built with Vision + Code</p>
+            <div class="social-icons">
+                <a href="https://wa.me/254716781953" target="_blank" class="social-btn whatsapp" title="Chat on WhatsApp">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+                </a>
+                <a href="https://github.com/julius-kirima" target="_blank" class="social-btn github" title="Visit GitHub">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" />
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
